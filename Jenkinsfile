@@ -1,7 +1,7 @@
 pipeline {
 agent {
   node {
-      label 'Local cloned Path'
+      label 'master'
       customWorkspace '/simple-node-js-react-npm-app'
   }
 }
@@ -25,4 +25,3 @@ agent {
     }
   }
 }
-

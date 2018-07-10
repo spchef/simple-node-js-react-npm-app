@@ -1506,4 +1506,133 @@ agent {[2;8H[K[3;1H  node {[3;9H[K[4;1H      label 'Local cloned Path'[4;
  1002  ll
  1003  pwd
  1004  ll
- 
+ 1005  cd ..
+ 1006  ll
+ 1007  vi Jenkinsfile 
+ 1008  ll
+ 1009  pwd
+ 1010  mv Jenkinsfile ../
+ 1011  ll
+ 1012  cd ..
+ 1013  ll
+ 1014  vi Jenkinsfile 
+ 1015  git add .
+ 1016  git commit -m " jenkins File added"
+ 1017  git push 
+ 1018  ll
+ 1019  node
+ 1020  ll
+ 1021  curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
+ 1022  sudo yum -y install nodejs
+ 1023  yum install gcc-c++ make
+ 1024  ll
+ 1025  npm
+ 1026  node
+ 1027  clear
+ 1028  vi Jenkinsfile 
+ 1029  history 
+]0;root@jenkins:/simple-node-js-react-npm-app[root@jenkins simple-node-js-react-npm-app]# git add . && git commit -m " jenkins File added"[C[C[C[1P"[1P"[1P"[1P"[1P"[1P"[1P"e" "n"o"d"e" "a"d"d"e"d"
+warning: You ran 'git add' with neither '-A (--all)' or '--ignore-removal',
+whose behaviour will change in Git 2.0 with respect to paths you removed.
+Paths like 'jenkins/Jenkinsfile' that are
+removed from your working tree are ignored with this version of Git.
+
+* 'git add --ignore-removal <pathspec>', which is the current default,
+  ignores paths you removed from your working tree.
+
+* 'git add --all <pathspec>' will let you also record the removals.
+
+Run 'git status' to check the paths you removed from your working tree.
+
+[master 9a091de]  jenkins File node added
+ Committer: root <root@jenkins.c.booming-cosine-200204.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 1328 insertions(+), 2 deletions(-)
+]0;root@jenkins:/simple-node-js-react-npm-app[root@jenkins simple-node-js-react-npm-app]# git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': pcsruniraj@gmail.com
+Password for 'https://pcsruniraj@gmail.com@github.com': 
+Counting objects: 9, done.
+Delta compression using up to 2 threads.
+Compressing objects:  20% (1/5)   Compressing objects:  40% (2/5)   Compressing objects:  60% (3/5)   Compressing objects:  80% (4/5)   Compressing objects: 100% (5/5)   Compressing objects: 100% (5/5), done.
+Writing objects:  20% (1/5)   Writing objects:  40% (2/5)   Writing objects:  60% (3/5)   Writing objects:  80% (4/5)   Writing objects: 100% (5/5)   Writing objects: 100% (5/5), 17.06 KiB | 0 bytes/s, done.
+Total 5 (delta 3), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/3)   [Kremote: Resolving deltas:  33% (1/3)   [Kremote: Resolving deltas:  66% (2/3)   [Kremote: Resolving deltas: 100% (3/3)   [Kremote: Resolving deltas: 100% (3/3), completed with 3 local objects.[K
+To https://github.com/spchef/simple-node-js-react-npm-app.git
+   277bf59..9a091de  master -> master
+]0;root@jenkins:/simple-node-js-react-npm-app[root@jenkins simple-node-js-react-npm-app]# clear
+[3;J[H[2J]0;root@jenkins:/simple-node-js-react-npm-app[root@jenkins simple-node-js-react-npm-app]# ll
+total 12
+drwxr-xr-x. 3 root root  39 Jul 10 08:42 [0m[38;5;27mjenkins[0m
+-rw-r--r--. 1 root root 635 Jul 10 08:52 Jenkinsfile
+-rw-r--r--. 1 root root 343 Jul 10 08:14 package.json
+drwxr-xr-x. 2 root root  64 Jul 10 08:14 [38;5;27mpublic[0m
+-rw-r--r--. 1 root root 744 Jul 10 08:14 README.md
+drwxr-xr-x. 2 root root 135 Jul 10 08:14 [38;5;27msrc[0m
+]0;root@jenkins:/simple-node-js-react-npm-app[root@jenkins simple-node-js-react-npm-app]# vi jenkins/[K[K[K[K[K[K[K[KJenkinsfile 
+[?1049h[?1h=[1;45r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[45;1H"Jenkinsfile" 28L, 635C[1;1Hpipeline {
+agent {
+  node {[4;7Hlabel 'Local cloned Path'[5;7HcustomWorkspace '/simple-node-js-react-npm-app'
+  }
+}
+  stages {
+    stage ('Build') {[10;7Hsteps {[11;9Hsh 'npm install'[12;7H}
+    }
+    stage ('Deploy') {[15;7Hwhen {[16;15Hexpression {[17;17HcurrentBuild.result == null || currentBuild.result == 'SUCCESS'[18;15H}[19;13H}[20;7Hsteps {[21;9Hsh '/simple-node-js-react-npm-app/jenkins/scripts/deliver.sh'[22;9Hinput message: 'Finished using the web site? (Click "Proceed" to continue)'[23;9Hsh '/simple-node-js-react-npm-app/jenkins/scripts/kill.sh'[24;7H}
+    }
+  }
+}
+
+[94m~                                                                                                                                                                                              [30;1H~                                                                                                                                                                                              [31;1H~                                                                                                                                                                                              [32;1H~                                                                                                                                                                                              [33;1H~                                                                                                                                                                                              [34;1H~                                                                                                                                                                                              [35;1H~                                                                                                                                                                                              [36;1H~                                                                                                                                                                                              [37;1H~                                                                                                                                                                                              [38;1H~                                                                                                                                                                                              [39;1H~                                                                                                                                                                                              [40;1H~                                                                                                                                                                                              [41;1H~                                                                                                                                                                                              [42;1H~                                                                                                                                                                                              [43;1H~                                                                                                                                                                                              [44;1H~                                                                                                                                                                                              [1;1H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [m[45;1H[K[1;1H[?12l[?25h[?25l[1;44r[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;3H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;7H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;7H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;3H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;1H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;3H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;5H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;7H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;9H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;7H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;5H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;5H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;7H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;15H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;17H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;15H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;13H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;7H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;9H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;9H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;9H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;7H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;5H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;3H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;1H[?12l[?25h[?25l[1;44r[m[44;1H
+[1;45r[44;1H[94m~                                                                                                                                                                                              [1;1H[?12l[?25h[?25l[m[45;1H--No lines in buffer--[1;1H[?12l[?25h[?25l[45;1H[1m-- INSERT --[m[45;13H[K[1;1H[?12l[?25h[?25lpipeline {
+agent {[2;8H[K[3;1H  node {[3;9H[K[4;1H      label 'master'[4;21H[K[5;1H      customWorkspace '/simple-node-js-react-npm-app'[5;54H[K[6;1H  }[6;4H[K[7;1H}[7;2H[K[8;1H  stages {[8;11H[K[9;1H    stage ('Build') {[9;22H[K[10;1H      steps {[10;14H[K[11;1H        sh 'npm install'[11;25H[K[12;1H      }[12;8H[K[13;1H    }[13;6H[K[14;1H    stage ('Deploy') {[14;23H[K[15;1H      when {[15;13H[K[16;1H              expression {[16;27H[K[17;1H                currentBuild.result == null || currentBuild.result == 'SUCCESS'[17;80H[K[18;1H              }[18;16H[K[19;1H            }[19;14H[K[20;1H      steps {[20;14H[K[21;1H        sh '/simple-node-js-react-npm-app/jenkins/scripts/deliver.sh'[21;70H[K[22;1H        input message: 'Finished using the web site? (Click "Proceed" to continue)'[22;84H[K[23;1H        sh '/simple-node-js-react-npm-app/jenkins/scripts/kill.sh'[23;67H[K[24;1H      }[24;8H[K[25;1H    }[25;6H[K[26;1H  }[26;4H[K[27;1H}[27;2H[K[27;2H[?12l[?25h[45;1H[K[27;1H[?25l[?12l[?25h[?25l[45;1H:[?12l[?25hwq![?25l"Jenkinsfile" 27L, 623C written
+[?1l>[?12l[?25h[?1049l]0;root@jenkins:/simple-node-js-react-npm-app[root@jenkins sim
