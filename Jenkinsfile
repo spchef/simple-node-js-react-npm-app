@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+agent {
+  node {
+      label 'Local cloned Path'
+      customWorkspace '/simple-node-js-react-npm-app'
+  }
+}
   stages {
     stage ('Build') {
       steps {
